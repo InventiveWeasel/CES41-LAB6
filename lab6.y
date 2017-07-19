@@ -258,6 +258,9 @@ void ExecQuadGT (quadrupla);
 void ExecQuadGE (quadrupla);
 void ExecQuadEQ (quadrupla);
 void ExecQuadNE (quadrupla);
+void ExecQuadOR	(quadrupla);
+void ExecQuadAND(quadrupla);
+void ExecQuadNOT(quadrupla);
 void ExecQuadAtrib (quadrupla);
 void ExecQuadRead (quadrupla);
 
@@ -1489,6 +1492,9 @@ void InterpCodIntermed () {
 			case OPGE: ExecQuadGE(quad); break;
 			case OPEQ: ExecQuadEQ(quad); break;
 			case OPNE: ExecQuadNE(quad); break;
+			case OPOR: ExecQuadOR(quad); break;
+			case OPAND: ExecQuadAND(quad); break;
+			case OPNOT: ExecQuadNOT(quad); break;
 			case OPEXIT: encerra = VERDADE; break;
 		}
 		if (! encerra) quad = quadprox;
@@ -2245,6 +2251,75 @@ void ExecQuadNE (quadrupla quad) {
 		*(quad->result.atr.simb->vallogic) = valfloat1 != valint2;
 	if (tipo1 == REALOPND && tipo2 == REALOPND)
 		*(quad->result.atr.simb->vallogic) = valfloat1 != valfloat2;
+}
+
+void ExecQuadOR (quadrupla quad) {
+	int tipo1, tipo2;
+	char vallogic1, vallogic2;
+	switch (quad->opnd1.tipo) {
+		case LOGICOPND:
+			tipo1 = LOGICOPND;  vallogic1 = quad->opnd1.atr.vallogic;
+			break;
+		case VAROPND:
+			tipo1 = LOGICOPND;
+			vallogic1 = *(quad->opnd1.atr.simb->vallogic);
+			break;
+	}
+	switch (quad->opnd2.tipo) {
+		case LOGICOPND:
+			tipo2 = LOGICOPND;  vallogic2 = quad->opnd2.atr.vallogic;  
+			break;
+		case VAROPND:
+			tipo2 = LOGICOPND;
+			vallogic2 = *(quad->opnd2.atr.simb->vallogic);  
+			break;
+	}
+	
+	/* Escrita do resultado */
+	*(quad->result.atr.simb->vallogic) = vallogic1 || vallogic2;
+}
+
+void ExecQuadAND (quadrupla quad) {
+	int tipo1, tipo2;
+	char vallogic1, vallogic2;
+	switch (quad->opnd1.tipo) {
+		case LOGICOPND:
+			tipo1 = LOGICOPND;  vallogic1 = quad->opnd1.atr.vallogic;
+			break;
+		case VAROPND:
+			tipo1 = LOGICOPND;
+			vallogic1 = *(quad->opnd1.atr.simb->vallogic);
+			break;
+	}
+	switch (quad->opnd2.tipo) {
+		case LOGICOPND:
+			tipo2 = LOGICOPND;  vallogic2 = quad->opnd2.atr.vallogic;  
+			break;
+		case VAROPND:
+			tipo2 = LOGICOPND;
+			vallogic2 = *(quad->opnd2.atr.simb->vallogic);  
+			break;
+	}
+	
+	/* Escrita do resultado */
+	*(quad->result.atr.simb->vallogic) = vallogic1 && vallogic2;
+}
+
+void ExecQuadNOT (quadrupla quad) {
+	int tipo1;
+	char vallogic1;
+	switch (quad->opnd1.tipo) {
+		case LOGICOPND:
+			tipo1 = LOGICOPND;  vallogic1 = quad->opnd1.atr.vallogic;
+			break;
+		case VAROPND:
+			tipo1 = LOGICOPND;
+			vallogic1 = *(quad->opnd1.atr.simb->vallogic);
+			break;
+	}
+	
+	/* Escrita do resultado */
+	*(quad->result.atr.simb->vallogic) = !vallogic1;
 }
 
 void EmpilharOpnd (operando x, pilhaoperando *P) {

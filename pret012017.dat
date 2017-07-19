@@ -29,6 +29,10 @@ var
 	write ("Resultado de -4.5!=65: ", ~4.5!=65);
 	write ("Resultado de -4.5!=-4.5: ", ~4.5!=~4.5);
 	write ("Resultado de TRUE!=FALSE: ", true!=false);
+	write ("Resultado de TRUE||FALSE: ", true||false);
+	write ("Resultado de TRUE&&FALSE: ", true&&false);
+	write ("Resultado de !TRUE: ", !true);
+	write ("Resultado de !FALSE: ", !false);
 	a = 1;
 	b = 2;
 	i = 3;
