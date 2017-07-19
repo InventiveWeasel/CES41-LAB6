@@ -17,6 +17,12 @@ var
 	write ("Valor de 49%6: ", 49%6);
 	write ("Valor de -3: ", ~3);
 	write ("Valor de -49/7.3: ", ~49/7.3);
+	write ("Resultado de -4.5<65: ", ~4.5<65);
+	write ("Resultado de -4.5>65: ", ~4.5>65);
+	write ("Resultado de -4.5<=65: ", ~4.5<=65);
+	write ("Resultado de -4.5<=-4.5: ", ~4.5<=~4.5);
+	write ("Resultado de -4.5>=65: ", ~4.5>=65);
+	write ("Resultado de -4.5>=-4.5: ", ~4.5>=~4.5);
 	a = 1;
 	b = 2;
 	i = 3;
