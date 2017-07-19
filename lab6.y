@@ -241,6 +241,10 @@ simbolo NovaTemp (int);
 void ImprimeQuadruplas (void);
 void RenumQuadruplas (quadrupla, quadrupla);
 
+/* Variaveis globais para o interpretador */
+FILE *finput;
+
+
 /* Prototipos das funcoes para o interpretador */
 
 void InterpCodIntermed (void);
@@ -1465,10 +1469,11 @@ void RenumQuadruplas (quadrupla quad1, quadrupla quad2) {
 }
 
 void InterpCodIntermed () {
-	quadrupla quad, quadprox;  char encerra;
+	quadrupla quad, quadprox;  char encerra, condicao;
 	printf ("\n\nINTERPRETADOR:\n");
 	InicPilhaOpnd (&pilhaopnd);
 	encerra = FALSO;
+	finput = fopen ("entrada2017", "r");
 	quad = codintermed->prox->listquad->prox;
 	while (! encerra) {
 		printf ("\n%4d) %s", quad->num, 
@@ -1495,6 +1500,18 @@ void InterpCodIntermed () {
 			case OPOR: ExecQuadOR(quad); break;
 			case OPAND: ExecQuadAND(quad); break;
 			case OPNOT: ExecQuadNOT(quad); break;
+			case OPATRIB: ExecQuadAtrib(quad); break;
+			case OPJUMP: quadprox = quad->result.atr.rotulo;  break;
+			case OPJF:
+				if (quad->opnd1.tipo == LOGICOPND)
+					condicao = quad->opnd1.atr.vallogic;
+				if (quad->opnd1.tipo == VAROPND)
+					condicao = *(quad->opnd1.atr.simb->vallogic);
+				if (! condicao)
+					quadprox = quad->result.atr.rotulo;
+				break;
+			case  OPREAD:   ExecQuadRead (quad);  break;
+			
 			case OPEXIT: encerra = VERDADE; break;
 		}
 		if (! encerra) quad = quadprox;
@@ -1508,7 +1525,6 @@ void AlocaVariaveis () {
 	for (i = 0; i < NCLASSHASH; i++)
 	       if (tabsimb[i]) {
 	              for (s = tabsimb[i]; s != NULL; s = s->prox){
-						printf("ha %d %s", s->tid, s->cadeia);
 	                     if (s->tid == IDVAR) {
 	                            nelemaloc = 1;
 	                            if (s->array)
@@ -2321,6 +2337,89 @@ void ExecQuadNOT (quadrupla quad) {
 	/* Escrita do resultado */
 	*(quad->result.atr.simb->vallogic) = !vallogic1;
 }
+
+void ExecQuadAtrib (quadrupla quad) {
+	int tipo1, valint1;
+	float valfloat1;
+	char valchar1, vallogic1;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;
+			valint1 = quad->opnd1.atr.valint; break;
+		case REALOPND:
+			tipo1 = REALOPND;
+			valfloat1 = quad->opnd1.atr.valfloat; break;
+		case CHAROPND:
+			tipo1 = CHAROPND;
+			valchar1 = quad->opnd1.atr.valchar; break;
+		case LOGICOPND:
+			tipo1 = LOGICOPND;
+			vallogic1 = quad->opnd1.atr.vallogic; break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valint); break;
+				case REAL:
+					tipo1 = REALOPND;
+					valfloat1=*(quad->opnd1.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo1 = CHAROPND;
+					valchar1=*(quad->opnd1.atr.simb->valchar);break;
+				case LOGICO:
+					tipo1 = LOGICOPND;
+					vallogic1 = *(quad->opnd1.atr.simb->vallogic);
+					break;
+			}
+			break;
+	}
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			if (tipo1 == INTOPND)  *(quad->result.atr.simb->valint) = valint1;
+			if (tipo1 == CHAROPND)*(quad->result.atr.simb->valint)=valchar1;
+			break;
+		case CARACTERE:
+			if (tipo1 == INTOPND) *(quad->result.atr.simb->valchar) = valint1;
+			if (tipo1==CHAROPND)*(quad->result.atr.simb->valchar)=valchar1;
+			break;
+		case LOGICO:  *(quad->result.atr.simb->vallogic) = vallogic1; break;
+		case REAL:
+			if (tipo1 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valint1;
+			if (tipo1 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1;
+			if (tipo1 == CHAROPND)
+				*(quad->result.atr.simb->valfloat) = valchar1;
+			break;
+	}
+}
+
+void ExecQuadRead (quadrupla quad) {
+	int i;  operando opndaux;  pilhaoperando pilhaopndaux;
+
+	printf ("\n\t\tLendo: \n");
+	InicPilhaOpnd (&pilhaopndaux);
+	for (i = 1; i <= quad->opnd1.atr.valint; i++) {
+		EmpilharOpnd (TopoOpnd (pilhaopnd), &pilhaopndaux);
+		DesempilharOpnd (&pilhaopnd);
+	}
+	for (i = 1; i <= quad->opnd1.atr.valint; i++) {
+		opndaux = TopoOpnd (pilhaopndaux);
+		DesempilharOpnd (&pilhaopndaux);
+      	switch (opndaux.atr.simb->tvar) {
+      		case INTEIRO:
+         			fscanf (finput, "%d", opndaux.atr.simb->valint); break;
+        		case REAL:
+         			fscanf (finput, "%g", opndaux.atr.simb->valfloat);break;
+         		case LOGICO:
+         			fscanf (finput, "%d", opndaux.atr.simb->vallogic); break;
+        		case CARACTERE:
+         			fscanf (finput, "%c", opndaux.atr.simb->valchar); break;
+     		}
+	}
+}
+
+
 
 void EmpilharOpnd (operando x, pilhaoperando *P) {
 	nohopnd *temp;
