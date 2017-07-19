@@ -63,7 +63,7 @@ void comentario (void);
 #define	CONTAPONT	26
 #define	ATRIBPONT	27
 #define CALLOP		28
-#define EXITOP		29
+#define OPEXIT		29
 #define RETURNOP	30
 
 /* Definicoes de constantes para os tipos dos operandos */
@@ -96,7 +96,7 @@ char *nomeoperquad[31] = {"",
 	"OR", "AND", "LT", "LE", "GT", "GE", "EQ", "NE", "MAIS",
 	"MENOS", "MULT", "DIV", "RESTO", "MENUN", "NOT", "ATRIB",
 	"OPENMOD", "NOP", "JUMP", "JF", "PARAM", "READ", "WRITE",
-	"IND", "INDEX", "CONTAPONT", "ATRIBPONT", "CALLOP", "EXITOP",
+	"IND", "INDEX", "CONTAPONT", "ATRIBPONT", "CALLOP", "OPEXIT",
 	"RETURNOP"
 };
 
@@ -128,6 +128,10 @@ struct celsimb {
 	simbolo escopo, prox;
 	listsimb listvar, listparam, listfunc;
 	modhead fhead;
+	int *valint;
+	float *valfloat;
+	char *valchar, *vallogic;
+
 };
 struct elemlistsimb {
 	simbolo simb;
@@ -237,6 +241,40 @@ simbolo NovaTemp (int);
 void ImprimeQuadruplas (void);
 void RenumQuadruplas (quadrupla, quadrupla);
 
+/* Prototipos das funcoes para o interpretador */
+
+void InterpCodIntermed (void);
+void AlocaVariaveis (void);
+void ExecQuadWrite (quadrupla);
+void ExecQuadMais (quadrupla);
+void ExecQuadMenos (quadrupla);
+void ExecQuadMultip (quadrupla);
+void ExecQuadDiv (quadrupla);
+void ExecQuadResto (quadrupla);
+void ExecQuadMenum (quadrupla);
+void ExecQuadLT (quadrupla);
+void ExecQuadAtrib (quadrupla);
+void ExecQuadRead (quadrupla);
+
+/*	Declaracoes para pilhas de operandos  */
+
+typedef struct nohopnd nohopnd;
+struct nohopnd {
+	operando opnd;
+	nohopnd *prox;
+};
+typedef nohopnd *pilhaoperando;
+pilhaoperando pilhaopnd;
+
+/*  Prototipos das funcoes para pilhas de operandos  */
+
+void EmpilharOpnd (operando, pilhaoperando *);
+void DesempilharOpnd (pilhaoperando *);
+operando TopoOpnd (pilhaoperando);
+void InicPilhaOpnd (pilhaoperando *);
+char VaziaOpnd (pilhaoperando);
+
+
 
 int tab = 0;
 void tabular (void);
@@ -328,10 +366,11 @@ Prog			:  {
 				}
 				   CompStat
 				{
-					GeraQuadrupla(EXITOP, opndidle, opndidle, opndidle);
+					GeraQuadrupla(OPEXIT, opndidle, opndidle, opndidle);
 					VerificaInicRef();
 					ImprimeTabSimb();
 					ImprimeQuadruplas();
+					InterpCodIntermed ();
 				}
 				;
 Decls 			:	
@@ -380,7 +419,7 @@ SubProgs	    :
 SubProgDecl   	:  Header  Decls  CompStat
 				{
 					escopo = escopo->escopo;
-					GeraQuadrupla(EXITOP, opndidle, opndidle, opndidle);
+					GeraQuadrupla(OPEXIT, opndidle, opndidle, opndidle);
 					if (escopo == NULL) printf("Erro, escopo voltou demais\n");
 				}
 				;
@@ -1415,6 +1454,457 @@ void RenumQuadruplas (quadrupla quad1, quadrupla quad2) {
       nquad++;
 		q->num = nquad;
 	}
+}
+
+void InterpCodIntermed () {
+	quadrupla quad, quadprox;  char encerra;
+	printf ("\n\nINTERPRETADOR:\n");
+	InicPilhaOpnd (&pilhaopnd);
+	encerra = FALSO;
+	quad = codintermed->prox->listquad->prox;
+	while (! encerra) {
+		printf ("\n%4d) %s", quad->num, 
+			nomeoperquad[quad->oper]);
+		quadprox = quad->prox;
+		switch (quad->oper) {
+			case OPENMOD:  AlocaVariaveis (); break;
+			case PARAM: 
+				EmpilharOpnd (quad->opnd1, &pilhaopnd); 
+				break;
+			case  OPWRITE:   ExecQuadWrite (quad);  break;
+			case OPMAIS:  ExecQuadMais (quad);  break;
+			case OPMENOS:  ExecQuadMenos (quad);  break;
+			case OPMULTIP:	ExecQuadMultip(quad);  break;
+			case OPDIV:	ExecQuadDiv(quad);  break;
+			case OPRESTO: ExecQuadResto(quad); break;
+			case OPMENUN: ExecQuadMenum(quad); break;
+			case OPEXIT: encerra = VERDADE; break;
+		}
+		if (! encerra) quad = quadprox;
+	}
+	printf ("\n");                 
+}
+
+void AlocaVariaveis () {
+	simbolo s; int nelemaloc, i, j;
+	printf ("\n\t\tAlocando as variaveis:");
+	for (i = 0; i < NCLASSHASH; i++)
+	       if (tabsimb[i]) {
+	              for (s = tabsimb[i]; s != NULL; s = s->prox){
+						printf("ha %d %s", s->tid, s->cadeia);
+	                     if (s->tid == IDVAR) {
+	                            nelemaloc = 1;
+	                            if (s->array)
+	                                   for (j = 1; j <= s->ndims; j++)  nelemaloc *= s->dims[j];
+	                            switch (s->tvar) {
+	                                   case INTEIRO:
+	                                          s->valint = malloc (nelemaloc * sizeof (int)); break;
+	                                   case REAL:
+	                                          s->valfloat = malloc (nelemaloc * sizeof (float)); break;
+	                                   case CARACTERE:
+	                                          s->valchar = malloc (nelemaloc * sizeof (char)); break;
+	                                   case LOGICO:
+	                                          s->vallogic = malloc (nelemaloc * sizeof (char)); break;
+	                           }
+	                           printf ("\n\t\t\t%s: %d elemento(s) alocado(s) ", s->cadeia, nelemaloc);
+	                   }
+	      	 }
+	      }
+}
+
+void ExecQuadWrite (quadrupla quad) {
+	int i;  operando opndaux;  pilhaoperando pilhaopndaux;
+
+	printf ("\n\t\tEscrevendo: \n\n");
+	InicPilhaOpnd (&pilhaopndaux);
+	for (i = 1; i <= quad->opnd1.atr.valint; i++) {
+		EmpilharOpnd (TopoOpnd (pilhaopnd), &pilhaopndaux);
+		DesempilharOpnd (&pilhaopnd);
+	}
+	for (i = 1; i <= quad->opnd1.atr.valint; i++) {
+		opndaux = TopoOpnd (pilhaopndaux);
+		DesempilharOpnd (&pilhaopndaux);
+		switch (opndaux.tipo) {
+			case INTOPND:
+				printf ("%d", opndaux.atr.valint); break;
+			case REALOPND:
+				printf ("%g", opndaux.atr.valfloat); break;
+			case CHAROPND:
+				printf ("%c", opndaux.atr.valchar); break;
+			case LOGICOPND:
+				if (opndaux.atr.vallogic == 1) printf ("TRUE");
+				else printf ("FALSE");
+				break;
+			case CADOPND:
+				printf ("%s", opndaux.atr.valcad); 
+				break ;
+				case VAROPND:
+				switch (opndaux.atr.simb->tvar) {
+					case INTEIRO:
+						printf ("%d", *(opndaux.atr.simb->valint)); break;
+					case REAL:
+						printf ("%g", 
+						     *(opndaux.atr.simb->valfloat));break;
+					case LOGICO:
+						if (*(opndaux.atr.simb->vallogic) == 1)
+							printf ("TRUE"); 
+							else printf ("FALSE"); break;
+					case CARACTERE:
+						printf ("%c", 
+						    *(opndaux.atr.simb->valchar)); break;
+				}
+				break;
+		}
+	}
+	printf ("\n");
+}
+
+void ExecQuadMais (quadrupla quad) {
+	int tipo1, tipo2, valint1, valint2;
+	float valfloat1, valfloat2;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valint;  break;
+		case REALOPND:
+			tipo1 = REALOPND;  valfloat1 = quad->opnd1.atr.valfloat; break;
+		case CHAROPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valint);  break;
+				case REAL:
+					tipo1 = REALOPND;
+					valfloat1=*(quad->opnd1.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valchar); break;
+			}
+			break;
+	}
+	switch (quad->opnd2.tipo) {
+		case INTOPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valint;  break;
+		case REALOPND:
+			tipo2 = REALOPND;  valfloat2 = quad->opnd2.atr.valfloat;  break;
+		case CHAROPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd2.atr.simb->tvar) {
+				case INTEIRO:
+					tipo2 = INTOPND;
+					valint2 = *(quad->opnd2.atr.simb->valint);  break;
+				case REAL:
+					tipo2 = REALOPND;
+					valfloat2=*(quad->opnd2.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo2 = INTOPND;
+					valint2=*(quad->opnd2.atr.simb->valchar);break;
+			}
+			break;
+	}
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			*(quad->result.atr.simb->valint) = valint1 + valint2;
+			break;
+		case REAL:
+			if (tipo1 == INTOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 + valint2;
+			if (tipo1 == INTOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 + valfloat2;
+			if (tipo1 == REALOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 + valint2;
+			if (tipo1 == REALOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 + valfloat2;
+			break;
+	}
+}
+
+void ExecQuadMenos (quadrupla quad) {
+	int tipo1, tipo2, valint1, valint2;
+	float valfloat1, valfloat2;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valint;  break;
+		case REALOPND:
+			tipo1 = REALOPND;  valfloat1 = quad->opnd1.atr.valfloat; break;
+		case CHAROPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valint);  break;
+				case REAL:
+					tipo1 = REALOPND;
+					valfloat1=*(quad->opnd1.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valchar); break;
+			}
+			break;
+	}
+	switch (quad->opnd2.tipo) {
+		case INTOPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valint;  break;
+		case REALOPND:
+			tipo2 = REALOPND;  valfloat2 = quad->opnd2.atr.valfloat;  break;
+		case CHAROPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd2.atr.simb->tvar) {
+				case INTEIRO:
+					tipo2 = INTOPND;
+					valint2 = *(quad->opnd2.atr.simb->valint);  break;
+				case REAL:
+					tipo2 = REALOPND;
+					valfloat2=*(quad->opnd2.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo2 = INTOPND;
+					valint2=*(quad->opnd2.atr.simb->valchar);break;
+			}
+			break;
+	}
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			*(quad->result.atr.simb->valint) = valint1 - valint2;
+			break;
+		case REAL:
+			if (tipo1 == INTOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 - valint2;
+			if (tipo1 == INTOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 - valfloat2;
+			if (tipo1 == REALOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 - valint2;
+			if (tipo1 == REALOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 - valfloat2;
+			break;
+	}
+}
+
+void ExecQuadMultip (quadrupla quad) {
+	int tipo1, tipo2, valint1, valint2;
+	float valfloat1, valfloat2;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valint;  break;
+		case REALOPND:
+			tipo1 = REALOPND;  valfloat1 = quad->opnd1.atr.valfloat; break;
+		case CHAROPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valint);  break;
+				case REAL:
+					tipo1 = REALOPND;
+					valfloat1=*(quad->opnd1.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valchar); break;
+			}
+			break;
+	}
+	switch (quad->opnd2.tipo) {
+		case INTOPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valint;  break;
+		case REALOPND:
+			tipo2 = REALOPND;  valfloat2 = quad->opnd2.atr.valfloat;  break;
+		case CHAROPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd2.atr.simb->tvar) {
+				case INTEIRO:
+					tipo2 = INTOPND;
+					valint2 = *(quad->opnd2.atr.simb->valint);  break;
+				case REAL:
+					tipo2 = REALOPND;
+					valfloat2=*(quad->opnd2.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo2 = INTOPND;
+					valint2=*(quad->opnd2.atr.simb->valchar);break;
+			}
+			break;
+	}
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			*(quad->result.atr.simb->valint) = valint1 * valint2;
+			break;
+		case REAL:
+			if (tipo1 == INTOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 * valint2;
+			if (tipo1 == INTOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 * valfloat2;
+			if (tipo1 == REALOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 * valint2;
+			if (tipo1 == REALOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 * valfloat2;
+			break;
+	}
+}
+
+void ExecQuadDiv (quadrupla quad) {
+	int tipo1, tipo2, valint1, valint2;
+	float valfloat1, valfloat2;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valint;  break;
+		case REALOPND:
+			tipo1 = REALOPND;  valfloat1 = quad->opnd1.atr.valfloat; break;
+		case CHAROPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valint);  break;
+				case REAL:
+					tipo1 = REALOPND;
+					valfloat1=*(quad->opnd1.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valchar); break;
+			}
+			break;
+	}
+	switch (quad->opnd2.tipo) {
+		case INTOPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valint;  break;
+		case REALOPND:
+			tipo2 = REALOPND;  valfloat2 = quad->opnd2.atr.valfloat;  break;
+		case CHAROPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd2.atr.simb->tvar) {
+				case INTEIRO:
+					tipo2 = INTOPND;
+					valint2 = *(quad->opnd2.atr.simb->valint);  break;
+				case REAL:
+					tipo2 = REALOPND;
+					valfloat2=*(quad->opnd2.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo2 = INTOPND;
+					valint2=*(quad->opnd2.atr.simb->valchar);break;
+			}
+			break;
+	}
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			*(quad->result.atr.simb->valint) = valint1 / valint2;
+			break;
+		case REAL:
+			if (tipo1 == INTOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 / valint2;
+			if (tipo1 == INTOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valint1 / valfloat2;
+			if (tipo1 == REALOPND && tipo2 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 / valint2;
+			if (tipo1 == REALOPND && tipo2 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1 / valfloat2;
+			break;
+	}
+}
+
+void ExecQuadResto (quadrupla quad) {
+	int tipo1, tipo2, valint1, valint2;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valint;  break;
+		case CHAROPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valint);  break;
+				case CARACTERE:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valchar); break;
+			}
+			break;
+	}
+	switch (quad->opnd2.tipo) {
+		case INTOPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valint;  break;
+		case CHAROPND:
+			tipo2 = INTOPND;  valint2 = quad->opnd2.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd2.atr.simb->tvar) {
+				case INTEIRO:
+					tipo2 = INTOPND;
+					valint2 = *(quad->opnd2.atr.simb->valint);  break;
+				case CARACTERE:
+					tipo2 = INTOPND;
+					valint2=*(quad->opnd2.atr.simb->valchar);break;
+			}
+			break;
+	}
+	*(quad->result.atr.simb->valint) = valint1 % valint2;
+}
+
+void ExecQuadMenum (quadrupla quad) {
+	int tipo1, valint1;
+	float valfloat1;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valint;  break;
+		case REALOPND:
+			tipo1 = REALOPND;  valfloat1 = quad->opnd1.atr.valfloat; break;
+		case CHAROPND:
+			tipo1 = INTOPND;  valint1 = quad->opnd1.atr.valchar;  break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valint);  break;
+				case REAL:
+					tipo1 = REALOPND;
+					valfloat1=*(quad->opnd1.atr.simb->valfloat);break;
+				case CARACTERE:
+					tipo1 = INTOPND;
+					valint1 = *(quad->opnd1.atr.simb->valchar); break;
+			}
+			break;
+	}
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			*(quad->result.atr.simb->valint) = -valint1;
+			break;
+		case REAL:
+			*(quad->result.atr.simb->valfloat) = -valfloat1;
+			break;
+	}
+}
+
+void EmpilharOpnd (operando x, pilhaoperando *P) {
+	nohopnd *temp;
+	temp = *P;   
+	*P = (nohopnd *) malloc (sizeof (nohopnd));
+	(*P)->opnd = x; (*P)->prox = temp;
+}
+
+void DesempilharOpnd (pilhaoperando *P) {
+	nohopnd *temp;
+	if (! VaziaOpnd (*P)) {
+		temp = *P;  *P = (*P)->prox; free (temp);
+	}
+	else  printf ("\n\tDelecao em pilha vazia\n");
+}
+
+operando TopoOpnd (pilhaoperando P) {
+	if (! VaziaOpnd (P))  return P->opnd;
+	else  printf ("\n\tTopo de pilha vazia\n");
+}
+
+void InicPilhaOpnd (pilhaoperando *P) { 
+	*P = NULL;
+}
+
+char VaziaOpnd (pilhaoperando P) {
+	if  (P == NULL)  return 1;  
+	else return 0; 
 }
 
 
