@@ -267,6 +267,9 @@ void ExecQuadAND(quadrupla);
 void ExecQuadNOT(quadrupla);
 void ExecQuadAtrib (quadrupla);
 void ExecQuadRead (quadrupla);
+void ExecQuadIndex(quadrupla);
+void ExecQuadContapont(quadrupla);
+void ExecQuadAtribpont(quadrupla);
 
 /*	Declaracoes para pilhas de operandos  */
 
@@ -277,6 +280,7 @@ struct nohopnd {
 };
 typedef nohopnd *pilhaoperando;
 pilhaoperando pilhaopnd;
+pilhaoperando pilhaindex;
 
 /*  Prototipos das funcoes para pilhas de operandos  */
 
@@ -684,7 +688,7 @@ ReadList		:  Variable
 						}
 						else{
 							opnd2.tipo = VAROPND;
-							opnd2.atr.simb = NovaTemp ($1.opnd.tipo);
+							opnd2.atr.simb = NovaTemp ($1.opnd.atr.simb->tvar);
 							GeraQuadrupla(PARAM, opnd2, opndidle, opndidle);
 							opnd1.tipo = INTOPND;
 							opnd1.atr.valint = 1;
@@ -976,9 +980,10 @@ Factor			:  Variable
 						$$.tipo = $1.simb->tvar;
 						$$.opnd = $1.opnd;
 						if($1.simb->ndims != 0){
-							result.atr.simb = NovaTemp(INTOPND);
+							result.atr.simb = NovaTemp($1.simb->tvar);
 							result.tipo = VAROPND;
 							GeraQuadrupla(CONTAPONT, $1.opnd, opndidle, result);
+							$$.opnd = result;
 						}
 					}
 				}
@@ -1075,7 +1080,7 @@ Variable		:  ID
 						else{
 							/* Caso seja um vetor */
 							$$.opnd.tipo = VAROPND;
-							$$.opnd.atr.simb = NovaTemp(INTOPND);
+							$$.opnd.atr.simb = NovaTemp($$.simb->tvar);
 							opnd1.tipo = VAROPND;
 							opnd1.atr.simb = $$.simb;
 							opnd2.tipo = INTOPND;
@@ -1093,7 +1098,15 @@ Subscript		:  OPBRAK {printf("[");} AuxExpr4  CLBRAK {printf("]");}
 					if($3.tipo!=INTEIRO && $3.tipo!=CARACTERE)
 						Incompatibilidade("Tipo inadequado para subscrito");
 					/* Empilhando índices do vetor */
-					GeraQuadrupla(IND, $3.opnd, opndidle, opndidle);
+					if($3.opnd.tipo == VAROPND)
+						GeraQuadrupla(IND, $3.opnd, opndidle, opndidle);
+					else{
+						opnd1.tipo = VAROPND;
+						opnd1.atr.simb = NovaTemp(INTEIRO);
+						opnd1.atr.simb->valint = $3.opnd.atr.valint;
+						GeraQuadrupla(IND, opnd1, opndidle, opndidle);
+					}
+					
 				}
 				;
 FuncCall    	:  ID OPPAR {printf("%s()", $1);} CLPAR
@@ -1472,6 +1485,7 @@ void InterpCodIntermed () {
 	quadrupla quad, quadprox;  char encerra, condicao;
 	printf ("\n\nINTERPRETADOR:\n");
 	InicPilhaOpnd (&pilhaopnd);
+	InicPilhaOpnd(&pilhaindex);
 	encerra = FALSO;
 	finput = fopen ("entrada2017", "r");
 	quad = codintermed->prox->listquad->prox;
@@ -1484,7 +1498,10 @@ void InterpCodIntermed () {
 			case PARAM: 
 				EmpilharOpnd (quad->opnd1, &pilhaopnd); 
 				break;
-			case  OPWRITE:   ExecQuadWrite (quad);  break;
+			case IND:
+				EmpilharOpnd (quad->opnd1, &pilhaindex);
+				break;
+			case OPWRITE:   ExecQuadWrite (quad);  break;
 			case OPMAIS:  ExecQuadMais (quad);  break;
 			case OPMENOS:  ExecQuadMenos (quad);  break;
 			case OPMULTIP:	ExecQuadMultip(quad);  break;
@@ -1511,7 +1528,9 @@ void InterpCodIntermed () {
 					quadprox = quad->result.atr.rotulo;
 				break;
 			case  OPREAD:   ExecQuadRead (quad);  break;
-			
+			case INDEX:	ExecQuadIndex(quad); break;
+			case CONTAPONT: ExecQuadContapont(quad); break;
+			case ATRIBPONT:	ExecQuadAtribpont(quad); break;
 			case OPEXIT: encerra = VERDADE; break;
 		}
 		if (! encerra) quad = quadprox;
@@ -2419,7 +2438,113 @@ void ExecQuadRead (quadrupla quad) {
 	}
 }
 
+void ExecQuadIndex(quadrupla quad){
+	int i,j;  operando opndaux;  pilhaoperando pilhaopndaux;
+	int endrel=0;
+	int aux = 1;
+	for (i = 1, j = quad->opnd1.atr.simb->ndims+1; i <= quad->opnd2.atr.valint; i++,j--) {
+		opndaux = TopoOpnd (pilhaindex);
+		DesempilharOpnd (&pilhaindex);
+		if(i == 1){
+			endrel = endrel + (*(opndaux.atr.simb->valint));
+		}
+		else{
+			aux = aux*quad->opnd1.atr.simb->dims[j];
+			endrel = endrel + *(opndaux.atr.simb->valint)*aux;
+		}
+	}
+	
+	switch (quad->opnd1.atr.simb->tvar) {
+		case INTEIRO:
+			quad->result.atr.simb->valint = endrel + quad->opnd1.atr.simb->valint;
+			break;
+		case REAL:
+			quad->result.atr.simb->valfloat = endrel + quad->opnd1.atr.simb->valfloat;
+			break;
+		case CARACTERE:
+			quad->result.atr.simb->valchar = endrel + quad->opnd1.atr.simb->valchar;
+			break;
+		case LOGICO:
+			quad->result.atr.simb->vallogic = endrel + quad->opnd1.atr.simb->vallogic;
+			break;
+	}
+}
 
+void ExecQuadContapont(quadrupla quad){
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			*quad->result.atr.simb->valint = *quad->opnd1.atr.simb->valint;
+			break;
+		case REAL:
+			*quad->result.atr.simb->valfloat = *quad->opnd1.atr.simb->valfloat;
+			break;
+		case CARACTERE:
+			*quad->result.atr.simb->valchar = *quad->opnd1.atr.simb->valchar;
+			break;
+		case LOGICO:
+			*quad->result.atr.simb->vallogic = *quad->opnd1.atr.simb->vallogic;
+			break;
+	}
+}
+
+void ExecQuadAtribpont(quadrupla quad){
+	int tipo1, valint1;
+	float valfloat1;
+	char valchar1, vallogic1;
+	switch (quad->opnd1.tipo) {
+		case INTOPND:
+			tipo1 = INTOPND;
+			valint1 = quad->opnd1.atr.valint; break;
+		case REALOPND:
+			tipo1 = REALOPND;
+			valfloat1 = quad->opnd1.atr.valfloat; break;
+		case CHAROPND:
+			tipo1 = CHAROPND;
+			valchar1 = quad->opnd1.atr.valchar; break;
+		case LOGICOPND:
+			tipo1 = LOGICOPND;
+			vallogic1 = quad->opnd1.atr.vallogic; break;
+		case VAROPND:
+			switch (quad->opnd1.atr.simb->tvar) {
+				case INTEIRO:
+					tipo1 = INTOPND;
+					valint1 = *quad->opnd1.atr.simb->valint;
+					break;
+				case REAL:
+					tipo1 = REALOPND;
+					valfloat1 = *quad->opnd1.atr.simb->valfloat;
+					break;
+				case CARACTERE:
+					tipo1 = CHAROPND;
+					valchar1 = *quad->opnd1.atr.simb->valchar;
+					break;
+				case LOGICO:
+					tipo1 = LOGICOPND;
+					vallogic1 = *quad->opnd1.atr.simb->vallogic;
+					break;
+			}
+		break;
+	}
+	switch (quad->result.atr.simb->tvar) {
+		case INTEIRO:
+			if (tipo1 == INTOPND)  *(quad->result.atr.simb->valint) = valint1;
+			if (tipo1 == CHAROPND)*(quad->result.atr.simb->valint)=valchar1;
+			break;
+		case CARACTERE:
+			if (tipo1 == INTOPND) *(quad->result.atr.simb->valchar) = valint1;
+			if (tipo1 == CHAROPND)*(quad->result.atr.simb->valchar) = valchar1;
+			break;
+		case LOGICO:  *(quad->result.atr.simb->vallogic) = vallogic1; break;
+		case REAL:
+			if (tipo1 == INTOPND)
+				*(quad->result.atr.simb->valfloat) = valint1;
+			if (tipo1 == REALOPND)
+				*(quad->result.atr.simb->valfloat) = valfloat1;
+			if (tipo1 == CHAROPND)
+				*(quad->result.atr.simb->valfloat) = valchar1;
+			break;
+	}
+}
 
 void EmpilharOpnd (operando x, pilhaoperando *P) {
 	nohopnd *temp;

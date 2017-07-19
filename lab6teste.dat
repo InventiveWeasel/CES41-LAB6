@@ -1,0 +1,11 @@
+program teste;
+var 
+	int a,b,i;
+{
+	a=5;
+	b=7;
+	for (i=0;i<9;i=i+1)
+	{
+		a=a+1;
+	}
+}	

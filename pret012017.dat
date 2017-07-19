@@ -53,10 +53,10 @@ var
 	k = 20.3;
 	write ("i = ", i, "; k = ", k);
 
-/*	while (i < k) {
+	while (i < k) {
 		i = i + 4;
 		write ("i = ", i, "; k = ", k);  
-	}								*/
+	}								
 
 	write ("Valor de i+k: ", i+k);
 }
