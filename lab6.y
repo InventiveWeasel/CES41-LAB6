@@ -1101,10 +1101,7 @@ Subscript		:  OPBRAK {printf("[");} AuxExpr4  CLBRAK {printf("]");}
 					if($3.opnd.tipo == VAROPND)
 						GeraQuadrupla(IND, $3.opnd, opndidle, opndidle);
 					else{
-						opnd1.tipo = VAROPND;
-						opnd1.atr.simb = NovaTemp(INTEIRO);
-						opnd1.atr.simb->valint = $3.opnd.atr.valint;
-						GeraQuadrupla(IND, opnd1, opndidle, opndidle);
+						GeraQuadrupla(IND, $3.opnd, opndidle, opndidle);
 					}
 					
 				}
@@ -1490,8 +1487,7 @@ void InterpCodIntermed () {
 	finput = fopen ("entrada2017", "r");
 	quad = codintermed->prox->listquad->prox;
 	while (! encerra) {
-		printf ("\n%4d) %s", quad->num, 
-			nomeoperquad[quad->oper]);
+		//printf ("\n%4d) %s", quad->num,	nomeoperquad[quad->oper]);
 		quadprox = quad->prox;
 		switch (quad->oper) {
 			case OPENMOD:  AlocaVariaveis (); break;
@@ -2442,15 +2438,20 @@ void ExecQuadIndex(quadrupla quad){
 	int i,j;  operando opndaux;  pilhaoperando pilhaopndaux;
 	int endrel=0;
 	int aux = 1;
+	int valor;
 	for (i = 1, j = quad->opnd1.atr.simb->ndims+1; i <= quad->opnd2.atr.valint; i++,j--) {
 		opndaux = TopoOpnd (pilhaindex);
 		DesempilharOpnd (&pilhaindex);
+		if(opndaux.tipo == VAROPND)
+			valor = *(opndaux.atr.simb->valint);
+		else
+			valor = opndaux.atr.valint;
 		if(i == 1){
-			endrel = endrel + (*(opndaux.atr.simb->valint));
+			endrel = endrel + valor;
 		}
 		else{
 			aux = aux*quad->opnd1.atr.simb->dims[j];
-			endrel = endrel + *(opndaux.atr.simb->valint)*aux;
+			endrel = endrel + valor*aux;
 		}
 	}
 	
@@ -2528,7 +2529,7 @@ void ExecQuadAtribpont(quadrupla quad){
 	switch (quad->result.atr.simb->tvar) {
 		case INTEIRO:
 			if (tipo1 == INTOPND)  *(quad->result.atr.simb->valint) = valint1;
-			if (tipo1 == CHAROPND)*(quad->result.atr.simb->valint)=valchar1;
+			if (tipo1 == CHAROPND) *(quad->result.atr.simb->valint) = valchar1;
 			break;
 		case CARACTERE:
 			if (tipo1 == INTOPND) *(quad->result.atr.simb->valchar) = valint1;

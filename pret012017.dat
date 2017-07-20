@@ -6,33 +6,6 @@ var
 {
 	write ("Valor 1: ", 14, "; Valor 2: ", 15.2, "; Valor 3: ", true);
 	write ("Valor de 3+4: ", 3+4);
-	write ("Valor de 3.4+6: ", 3.4+6);
-	write ("Valor de 3-4: ", 3-4);
-	write ("Valor de 3.4-6: ", 3.4-6);
-	write ("Valor de char 7 menos char 0: ", '7'-'0');
-	write ("Valor de 3*24: ", 3*24);
-	write ("Valor de 3.4*6: ", 3.4*6);
-	write ("Valor de 35/7: ", 35/7);
-	write ("Valor de 25.5/5: ", 25.5/5);
-	write ("Valor de 49%6: ", 49%6);
-	write ("Valor de -3: ", ~3);
-	write ("Valor de -49/7.3: ", ~49/7.3);
-	write ("Resultado de -4.5<65: ", ~4.5<65);
-	write ("Resultado de -4.5>65: ", ~4.5>65);
-	write ("Resultado de -4.5<=65: ", ~4.5<=65);
-	write ("Resultado de -4.5<=-4.5: ", ~4.5<=~4.5);
-	write ("Resultado de -4.5>=65: ", ~4.5>=65);
-	write ("Resultado de -4.5>=-4.5: ", ~4.5>=~4.5);
-	write ("Resultado de -4.5==65: ", ~4.5==65);
-	write ("Resultado de -4.5==-4.5: ", ~4.5==~4.5);
-	write ("Resultado de TRUE==FALSE: ", true==false);
-	write ("Resultado de -4.5!=65: ", ~4.5!=65);
-	write ("Resultado de -4.5!=-4.5: ", ~4.5!=~4.5);
-	write ("Resultado de TRUE!=FALSE: ", true!=false);
-	write ("Resultado de TRUE||FALSE: ", true||false);
-	write ("Resultado de TRUE&&FALSE: ", true&&false);
-	write ("Resultado de !TRUE: ", !true);
-	write ("Resultado de !FALSE: ", !false);
 	a = 1;
 	b = 2;
 	i = 3;
@@ -56,7 +29,14 @@ var
 	while (i < k) {
 		i = i + 4;
 		write ("i = ", i, "; k = ", k);  
-	}								
-
+	}
+	
 	write ("Valor de i+k: ", i+k);
+	
+	i = 0;
+	repeat{
+	i = i+1;
+	}while(i < 10);
+	write("Valor de i: ",i);
+	
 }

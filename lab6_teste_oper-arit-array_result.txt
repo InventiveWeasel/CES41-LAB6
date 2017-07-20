@@ -1,0 +1,459 @@
+program teste;
+
+var
+    int a, b, c, i, j;
+    float k, A[5][4][6];
+    logic b1, B[1][2];
+{
+    A[1][1][1] = 1;
+    write("A[1][1][1] = ", A[1][1][1]);
+    A[2][2][2] = 2;
+    write("A[2][2][2] = ", A[2][2][2]);
+    write("A[1][1][1] = ", A[1][1][1]);
+    A[3][3][3] = A[1][1][1] + A[2][2][2];
+    write("A[3][3][3] = ", A[3][3][3]);
+    A[3][3][3] = A[1][1][1] - A[2][2][2];
+    write("A[3][3][3] = ", A[3][3][3]);
+    A[3][3][3] = A[1][1][1] * A[2][2][2];
+    write("A[3][3][3] = ", A[3][3][3]);
+    A[3][3][3] = A[1][1][1] / A[2][2][2];
+    write("A[3][3][3] = ", A[3][3][3]);
+    B[0][1] = 1 < 2;
+    write("B[0][1] = ", B[0][1]);
+}
+a do escopo teste nao referenciado
+a do escopo teste nao inicializado
+b do escopo teste nao referenciado
+b do escopo teste nao inicializado
+c do escopo teste nao referenciado
+c do escopo teste nao inicializado
+b1 do escopo teste nao referenciado
+b1 do escopo teste nao inicializado
+i do escopo teste nao referenciado
+i do escopo teste nao inicializado
+j do escopo teste nao referenciado
+j do escopo teste nao inicializado
+k do escopo teste nao referenciado
+k do escopo teste nao inicializado
+
+
+   TABELA  DE  SIMBOLOS:
+
+Classe 4:
+  ##1(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 5:
+  ##2(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  a(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 6:
+  ##10(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##3(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  b(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 7:
+  ##20(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##11(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##4(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  c(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 8:
+  ##30(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##21(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##12(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##5(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 9:
+  ##40(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##31(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##22(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##13(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##6(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  b1(IDVAR LOGICO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 10:
+  ##41(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##32(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##23(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##14(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##7(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 11:
+  ##42(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##33(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##24(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##15(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##8(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 12:
+  ##43(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##34(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##25(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##16(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##9(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 13:
+  ##44(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##35(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##26(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##17(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  i(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 14:
+  ##36(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##27(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##18(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  j(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 15:
+  ##37(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##28(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##19(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  k(IDVAR REAL), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 16:
+  ##38(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##29(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 17:
+  ##39(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 19:
+  A(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+	Array: (3 dimensoes): 5 4 6
+
+Classe 20:
+  B(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+	Array: (2 dimensoes): 1 2
+
+  teste(IDPROG NAOVAR), escopo: null
+	Variaveis:  ##44(LOGICO) ##43(LOGICO) ##42(LOGICO) ##41(LOGICO) ##40(REAL) ##39(REAL) ##38(REAL) ##37(REAL) ##36(REAL) ##35(REAL) ##34(REAL) ##33(REAL) ##32(REAL) ##31(REAL) ##30(REAL) ##29(REAL) ##28(REAL) ##27(REAL) ##26(REAL) ##25(REAL) ##24(REAL) ##23(REAL) ##22(REAL) ##21(REAL) ##20(REAL) ##19(REAL) ##18(REAL) ##17(REAL) ##16(REAL) ##15(REAL) ##14(REAL) ##13(REAL) ##12(REAL) ##11(REAL) ##10(REAL) ##9(REAL) ##8(REAL) ##7(REAL) ##6(REAL) ##5(REAL) ##4(REAL) ##3(REAL) ##2(REAL) ##1(REAL) B(LOGICO) b1(LOGICO) A(REAL) k(REAL) j(INTEIRO) i(INTEIRO) c(INTEIRO) b(INTEIRO) a(INTEIRO)
+
+
+
+Quadruplas do modulo teste:
+
+	   1) OPENMOD, (MODULO, teste), (IDLE), (IDLE)
+	   2) IND, (INT, 1), (IDLE), (IDLE)
+	   3) IND, (INT, 1), (IDLE), (IDLE)
+	   4) IND, (INT, 1), (IDLE), (IDLE)
+	   5) INDEX, (VAR, A), (INT, 3), (VAR, ##1)
+	   6) ATRIBPONT, (REAL, 1), (IDLE), (VAR, ##1)
+	   7) PARAM, (CADEIA, A[1][1][1] = ), (IDLE), (IDLE)
+	   8) IND, (INT, 1), (IDLE), (IDLE)
+	   9) IND, (INT, 1), (IDLE), (IDLE)
+	  10) IND, (INT, 1), (IDLE), (IDLE)
+	  11) INDEX, (VAR, A), (INT, 3), (VAR, ##2)
+	  12) CONTAPONT, (VAR, ##2), (IDLE), (VAR, ##3)
+	  13) PARAM, (VAR, ##3), (IDLE), (IDLE)
+	  14) WRITE, (INT, 2), (IDLE), (IDLE)
+	  15) IND, (INT, 2), (IDLE), (IDLE)
+	  16) IND, (INT, 2), (IDLE), (IDLE)
+	  17) IND, (INT, 2), (IDLE), (IDLE)
+	  18) INDEX, (VAR, A), (INT, 3), (VAR, ##4)
+	  19) ATRIBPONT, (INT, 2), (IDLE), (VAR, ##4)
+	  20) PARAM, (CADEIA, A[2][2][2] = ), (IDLE), (IDLE)
+	  21) IND, (INT, 2), (IDLE), (IDLE)
+	  22) IND, (INT, 2), (IDLE), (IDLE)
+	  23) IND, (INT, 2), (IDLE), (IDLE)
+	  24) INDEX, (VAR, A), (INT, 3), (VAR, ##5)
+	  25) CONTAPONT, (VAR, ##5), (IDLE), (VAR, ##6)
+	  26) PARAM, (VAR, ##6), (IDLE), (IDLE)
+	  27) WRITE, (INT, 2), (IDLE), (IDLE)
+	  28) PARAM, (CADEIA, A[1][1][1] = ), (IDLE), (IDLE)
+	  29) IND, (INT, 1), (IDLE), (IDLE)
+	  30) IND, (INT, 1), (IDLE), (IDLE)
+	  31) IND, (INT, 1), (IDLE), (IDLE)
+	  32) INDEX, (VAR, A), (INT, 3), (VAR, ##7)
+	  33) CONTAPONT, (VAR, ##7), (IDLE), (VAR, ##8)
+	  34) PARAM, (VAR, ##8), (IDLE), (IDLE)
+	  35) WRITE, (INT, 2), (IDLE), (IDLE)
+	  36) IND, (INT, 3), (IDLE), (IDLE)
+	  37) IND, (INT, 3), (IDLE), (IDLE)
+	  38) IND, (INT, 3), (IDLE), (IDLE)
+	  39) INDEX, (VAR, A), (INT, 3), (VAR, ##9)
+	  40) IND, (INT, 1), (IDLE), (IDLE)
+	  41) IND, (INT, 1), (IDLE), (IDLE)
+	  42) IND, (INT, 1), (IDLE), (IDLE)
+	  43) INDEX, (VAR, A), (INT, 3), (VAR, ##10)
+	  44) CONTAPONT, (VAR, ##10), (IDLE), (VAR, ##11)
+	  45) IND, (INT, 2), (IDLE), (IDLE)
+	  46) IND, (INT, 2), (IDLE), (IDLE)
+	  47) IND, (INT, 2), (IDLE), (IDLE)
+	  48) INDEX, (VAR, A), (INT, 3), (VAR, ##12)
+	  49) CONTAPONT, (VAR, ##12), (IDLE), (VAR, ##13)
+	  50) MAIS, (VAR, ##11), (VAR, ##13), (VAR, ##14)
+	  51) ATRIBPONT, (VAR, ##14), (IDLE), (VAR, ##9)
+	  52) PARAM, (CADEIA, A[3][3][3] = ), (IDLE), (IDLE)
+	  53) IND, (INT, 3), (IDLE), (IDLE)
+	  54) IND, (INT, 3), (IDLE), (IDLE)
+	  55) IND, (INT, 3), (IDLE), (IDLE)
+	  56) INDEX, (VAR, A), (INT, 3), (VAR, ##15)
+	  57) CONTAPONT, (VAR, ##15), (IDLE), (VAR, ##16)
+	  58) PARAM, (VAR, ##16), (IDLE), (IDLE)
+	  59) WRITE, (INT, 2), (IDLE), (IDLE)
+	  60) IND, (INT, 3), (IDLE), (IDLE)
+	  61) IND, (INT, 3), (IDLE), (IDLE)
+	  62) IND, (INT, 3), (IDLE), (IDLE)
+	  63) INDEX, (VAR, A), (INT, 3), (VAR, ##17)
+	  64) IND, (INT, 1), (IDLE), (IDLE)
+	  65) IND, (INT, 1), (IDLE), (IDLE)
+	  66) IND, (INT, 1), (IDLE), (IDLE)
+	  67) INDEX, (VAR, A), (INT, 3), (VAR, ##18)
+	  68) CONTAPONT, (VAR, ##18), (IDLE), (VAR, ##19)
+	  69) IND, (INT, 2), (IDLE), (IDLE)
+	  70) IND, (INT, 2), (IDLE), (IDLE)
+	  71) IND, (INT, 2), (IDLE), (IDLE)
+	  72) INDEX, (VAR, A), (INT, 3), (VAR, ##20)
+	  73) CONTAPONT, (VAR, ##20), (IDLE), (VAR, ##21)
+	  74) MENOS, (VAR, ##19), (VAR, ##21), (VAR, ##22)
+	  75) ATRIBPONT, (VAR, ##22), (IDLE), (VAR, ##17)
+	  76) PARAM, (CADEIA, A[3][3][3] = ), (IDLE), (IDLE)
+	  77) IND, (INT, 3), (IDLE), (IDLE)
+	  78) IND, (INT, 3), (IDLE), (IDLE)
+	  79) IND, (INT, 3), (IDLE), (IDLE)
+	  80) INDEX, (VAR, A), (INT, 3), (VAR, ##23)
+	  81) CONTAPONT, (VAR, ##23), (IDLE), (VAR, ##24)
+	  82) PARAM, (VAR, ##24), (IDLE), (IDLE)
+	  83) WRITE, (INT, 2), (IDLE), (IDLE)
+	  84) IND, (INT, 3), (IDLE), (IDLE)
+	  85) IND, (INT, 3), (IDLE), (IDLE)
+	  86) IND, (INT, 3), (IDLE), (IDLE)
+	  87) INDEX, (VAR, A), (INT, 3), (VAR, ##25)
+	  88) IND, (INT, 1), (IDLE), (IDLE)
+	  89) IND, (INT, 1), (IDLE), (IDLE)
+	  90) IND, (INT, 1), (IDLE), (IDLE)
+	  91) INDEX, (VAR, A), (INT, 3), (VAR, ##26)
+	  92) CONTAPONT, (VAR, ##26), (IDLE), (VAR, ##27)
+	  93) IND, (INT, 2), (IDLE), (IDLE)
+	  94) IND, (INT, 2), (IDLE), (IDLE)
+	  95) IND, (INT, 2), (IDLE), (IDLE)
+	  96) INDEX, (VAR, A), (INT, 3), (VAR, ##28)
+	  97) CONTAPONT, (VAR, ##28), (IDLE), (VAR, ##29)
+	  98) MULT, (VAR, ##27), (VAR, ##29), (VAR, ##30)
+	  99) ATRIBPONT, (VAR, ##30), (IDLE), (VAR, ##25)
+	 100) PARAM, (CADEIA, A[3][3][3] = ), (IDLE), (IDLE)
+	 101) IND, (INT, 3), (IDLE), (IDLE)
+	 102) IND, (INT, 3), (IDLE), (IDLE)
+	 103) IND, (INT, 3), (IDLE), (IDLE)
+	 104) INDEX, (VAR, A), (INT, 3), (VAR, ##31)
+	 105) CONTAPONT, (VAR, ##31), (IDLE), (VAR, ##32)
+	 106) PARAM, (VAR, ##32), (IDLE), (IDLE)
+	 107) WRITE, (INT, 2), (IDLE), (IDLE)
+	 108) IND, (INT, 3), (IDLE), (IDLE)
+	 109) IND, (INT, 3), (IDLE), (IDLE)
+	 110) IND, (INT, 3), (IDLE), (IDLE)
+	 111) INDEX, (VAR, A), (INT, 3), (VAR, ##33)
+	 112) IND, (INT, 1), (IDLE), (IDLE)
+	 113) IND, (INT, 1), (IDLE), (IDLE)
+	 114) IND, (INT, 1), (IDLE), (IDLE)
+	 115) INDEX, (VAR, A), (INT, 3), (VAR, ##34)
+	 116) CONTAPONT, (VAR, ##34), (IDLE), (VAR, ##35)
+	 117) IND, (INT, 2), (IDLE), (IDLE)
+	 118) IND, (INT, 2), (IDLE), (IDLE)
+	 119) IND, (INT, 2), (IDLE), (IDLE)
+	 120) INDEX, (VAR, A), (INT, 3), (VAR, ##36)
+	 121) CONTAPONT, (VAR, ##36), (IDLE), (VAR, ##37)
+	 122) DIV, (VAR, ##35), (VAR, ##37), (VAR, ##38)
+	 123) ATRIBPONT, (VAR, ##38), (IDLE), (VAR, ##33)
+	 124) PARAM, (CADEIA, A[3][3][3] = ), (IDLE), (IDLE)
+	 125) IND, (INT, 3), (IDLE), (IDLE)
+	 126) IND, (INT, 3), (IDLE), (IDLE)
+	 127) IND, (INT, 3), (IDLE), (IDLE)
+	 128) INDEX, (VAR, A), (INT, 3), (VAR, ##39)
+	 129) CONTAPONT, (VAR, ##39), (IDLE), (VAR, ##40)
+	 130) PARAM, (VAR, ##40), (IDLE), (IDLE)
+	 131) WRITE, (INT, 2), (IDLE), (IDLE)
+	 132) IND, (INT, 0), (IDLE), (IDLE)
+	 133) IND, (INT, 1), (IDLE), (IDLE)
+	 134) INDEX, (VAR, B), (INT, 2), (VAR, ##41)
+	 135) LT, (INT, 1), (INT, 2), (VAR, ##42)
+	 136) ATRIBPONT, (VAR, ##42), (IDLE), (VAR, ##41)
+	 137) PARAM, (CADEIA, B[0][1] = ), (IDLE), (IDLE)
+	 138) IND, (INT, 0), (IDLE), (IDLE)
+	 139) IND, (INT, 1), (IDLE), (IDLE)
+	 140) INDEX, (VAR, B), (INT, 2), (VAR, ##43)
+	 141) CONTAPONT, (VAR, ##43), (IDLE), (VAR, ##44)
+	 142) PARAM, (VAR, ##44), (IDLE), (IDLE)
+	 143) WRITE, (INT, 2), (IDLE), (IDLE)
+	 144) OPEXIT, (IDLE), (IDLE), (IDLE)
+
+
+INTERPRETADOR:
+
+		Alocando as variaveis:
+			##1: 1 elemento(s) alocado(s) 
+			##2: 1 elemento(s) alocado(s) 
+			a: 1 elemento(s) alocado(s) 
+			##10: 1 elemento(s) alocado(s) 
+			##3: 1 elemento(s) alocado(s) 
+			b: 1 elemento(s) alocado(s) 
+			##20: 1 elemento(s) alocado(s) 
+			##11: 1 elemento(s) alocado(s) 
+			##4: 1 elemento(s) alocado(s) 
+			c: 1 elemento(s) alocado(s) 
+			##30: 1 elemento(s) alocado(s) 
+			##21: 1 elemento(s) alocado(s) 
+			##12: 1 elemento(s) alocado(s) 
+			##5: 1 elemento(s) alocado(s) 
+			##40: 1 elemento(s) alocado(s) 
+			##31: 1 elemento(s) alocado(s) 
+			##22: 1 elemento(s) alocado(s) 
+			##13: 1 elemento(s) alocado(s) 
+			##6: 1 elemento(s) alocado(s) 
+			b1: 1 elemento(s) alocado(s) 
+			##41: 1 elemento(s) alocado(s) 
+			##32: 1 elemento(s) alocado(s) 
+			##23: 1 elemento(s) alocado(s) 
+			##14: 1 elemento(s) alocado(s) 
+			##7: 1 elemento(s) alocado(s) 
+			##42: 1 elemento(s) alocado(s) 
+			##33: 1 elemento(s) alocado(s) 
+			##24: 1 elemento(s) alocado(s) 
+			##15: 1 elemento(s) alocado(s) 
+			##8: 1 elemento(s) alocado(s) 
+			##43: 1 elemento(s) alocado(s) 
+			##34: 1 elemento(s) alocado(s) 
+			##25: 1 elemento(s) alocado(s) 
+			##16: 1 elemento(s) alocado(s) 
+			##9: 1 elemento(s) alocado(s) 
+			##44: 1 elemento(s) alocado(s) 
+			##35: 1 elemento(s) alocado(s) 
+			##26: 1 elemento(s) alocado(s) 
+			##17: 1 elemento(s) alocado(s) 
+			i: 1 elemento(s) alocado(s) 
+			##36: 1 elemento(s) alocado(s) 
+			##27: 1 elemento(s) alocado(s) 
+			##18: 1 elemento(s) alocado(s) 
+			j: 1 elemento(s) alocado(s) 
+			##37: 1 elemento(s) alocado(s) 
+			##28: 1 elemento(s) alocado(s) 
+			##19: 1 elemento(s) alocado(s) 
+			k: 1 elemento(s) alocado(s) 
+			##38: 1 elemento(s) alocado(s) 
+			##29: 1 elemento(s) alocado(s) 
+			##39: 1 elemento(s) alocado(s) 
+			A: 120 elemento(s) alocado(s) 
+			B: 2 elemento(s) alocado(s) 
+		Escrevendo: 
+
+A[1][1][1] = 1
+
+		Escrevendo: 
+
+A[2][2][2] = 2
+
+		Escrevendo: 
+
+A[1][1][1] = 1
+
+		Escrevendo: 
+
+A[3][3][3] = 3
+
+		Escrevendo: 
+
+A[3][3][3] = -1
+
+		Escrevendo: 
+
+A[3][3][3] = 2
+
+		Escrevendo: 
+
+A[3][3][3] = 0.5
+
+		Escrevendo: 
+
+B[0][1] = TRUE
+

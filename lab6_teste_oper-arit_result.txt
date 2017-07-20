@@ -1,0 +1,543 @@
+program teste;
+
+var
+    int a, b, c, i, j;
+    float k;
+    logic b1;
+    int A[5][4];
+{
+    write("Valor 1: ", 14, "; Valor 2: ", 15.2, "; Valor 3: ", true);
+    write("Valor de 3+4: ", 3 + 4);
+    write("Valor de 3.4+6: ", 3.4 + 6);
+    write("Valor de 3-4: ", 3 - 4);
+    write("Valor de 3.4-6: ", 3.4 - 6);
+    write("Valor de char 7 menos char 0: ", '7' - '0');
+    write("Valor de 3*24: ", 3 * 24);
+    write("Valor de 3.4*6: ", 3.4 * 6);
+    write("Valor de 35/7: ", 35 / 7);
+    write("Valor de 25.5/5: ", 25.5 / 5);
+    write("Valor de 49%6: ", 49 % 6);
+    write("Valor de -3: ", ~3);
+    write("Valor de -49/7.3: ", ~49 / 7.3);
+    write("Resultado de -4.5<65: ", ~4.5 < 65);
+    write("Resultado de -4.5>65: ", ~4.5 > 65);
+    write("Resultado de -4.5<=65: ", ~4.5 <= 65);
+    write("Resultado de -4.5<=-4.5: ", ~4.5 <= ~4.5);
+    write("Resultado de -4.5>=65: ", ~4.5 >= 65);
+    write("Resultado de -4.5>=-4.5: ", ~4.5 >= ~4.5);
+    write("Resultado de -4.5==65: ", ~4.5 == 65);
+    write("Resultado de -4.5==-4.5: ", ~4.5 == ~4.5);
+    write("Resultado de TRUE==FALSE: ", true == false);
+    write("Resultado de -4.5!=65: ", ~4.5 != 65);
+    write("Resultado de -4.5!=-4.5: ", ~4.5 != ~4.5);
+    write("Resultado de TRUE!=FALSE: ", true != false);
+    write("Resultado de TRUE||FALSE: ", true || false);
+    write("Resultado de TRUE&&FALSE: ", true && false);
+    write("Resultado de !TRUE: ", !true);
+    write("Resultado de !FALSE: ", !false);
+}
+a do escopo teste nao referenciado
+a do escopo teste nao inicializado
+b do escopo teste nao referenciado
+b do escopo teste nao inicializado
+c do escopo teste nao referenciado
+c do escopo teste nao inicializado
+b1 do escopo teste nao referenciado
+b1 do escopo teste nao inicializado
+i do escopo teste nao referenciado
+i do escopo teste nao inicializado
+j do escopo teste nao referenciado
+j do escopo teste nao inicializado
+k do escopo teste nao referenciado
+k do escopo teste nao inicializado
+A do escopo teste nao referenciado
+A do escopo teste nao inicializado
+
+
+   TABELA  DE  SIMBOLOS:
+
+Classe 4:
+  ##1(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 5:
+  ##2(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  a(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 6:
+  ##10(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##3(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  b(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 7:
+  ##20(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##11(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##4(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  c(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 8:
+  ##30(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##21(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##12(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##5(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 9:
+  ##40(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##31(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##22(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##13(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##6(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  b1(IDVAR LOGICO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 10:
+  ##41(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##32(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##23(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##14(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##7(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 11:
+  ##42(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##33(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##24(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##15(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##8(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 12:
+  ##43(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##34(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##25(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##16(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##9(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 13:
+  ##35(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##26(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##17(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  i(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 14:
+  ##36(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##27(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##18(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  j(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 15:
+  ##37(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##28(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##19(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  k(IDVAR REAL), escopo: teste
+	Inicializado: 0, Referenciado: 0
+
+Classe 16:
+  ##38(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##29(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 17:
+  ##39(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 19:
+  A(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+	Array: (2 dimensoes): 5 4
+
+Classe 20:
+  teste(IDPROG NAOVAR), escopo: null
+	Variaveis:  ##43(LOGICO) ##42(LOGICO) ##41(LOGICO) ##40(LOGICO) ##39(LOGICO) ##38(LOGICO) ##37(REAL) ##36(REAL) ##35(LOGICO) ##34(REAL) ##33(LOGICO) ##32(LOGICO) ##31(REAL) ##30(REAL) ##29(LOGICO) ##28(REAL) ##27(LOGICO) ##26(REAL) ##25(REAL) ##24(LOGICO) ##23(REAL) ##22(LOGICO) ##21(REAL) ##20(REAL) ##19(LOGICO) ##18(REAL) ##17(LOGICO) ##16(REAL) ##15(LOGICO) ##14(REAL) ##13(REAL) ##12(INTEIRO) ##11(INTEIRO) ##10(INTEIRO) ##9(REAL) ##8(INTEIRO) ##7(REAL) ##6(INTEIRO) ##5(INTEIRO) ##4(REAL) ##3(INTEIRO) ##2(REAL) ##1(INTEIRO) A(INTEIRO) b1(LOGICO) k(REAL) j(INTEIRO) i(INTEIRO) c(INTEIRO) b(INTEIRO) a(INTEIRO)
+
+
+
+Quadruplas do modulo teste:
+
+	   1) OPENMOD, (MODULO, teste), (IDLE), (IDLE)
+	   2) PARAM, (CADEIA, Valor 1: ), (IDLE), (IDLE)
+	   3) PARAM, (INT, 14), (IDLE), (IDLE)
+	   4) PARAM, (CADEIA, ; Valor 2: ), (IDLE), (IDLE)
+	   5) PARAM, (REAL, 15.2), (IDLE), (IDLE)
+	   6) PARAM, (CADEIA, ; Valor 3: ), (IDLE), (IDLE)
+	   7) PARAM, (LOGIC, 1), (IDLE), (IDLE)
+	   8) WRITE, (INT, 6), (IDLE), (IDLE)
+	   9) PARAM, (CADEIA, Valor de 3+4: ), (IDLE), (IDLE)
+	  10) MAIS, (INT, 3), (INT, 4), (VAR, ##1)
+	  11) PARAM, (VAR, ##1), (IDLE), (IDLE)
+	  12) WRITE, (INT, 2), (IDLE), (IDLE)
+	  13) PARAM, (CADEIA, Valor de 3.4+6: ), (IDLE), (IDLE)
+	  14) MAIS, (REAL, 3.4), (INT, 6), (VAR, ##2)
+	  15) PARAM, (VAR, ##2), (IDLE), (IDLE)
+	  16) WRITE, (INT, 2), (IDLE), (IDLE)
+	  17) PARAM, (CADEIA, Valor de 3-4: ), (IDLE), (IDLE)
+	  18) MENOS, (INT, 3), (INT, 4), (VAR, ##3)
+	  19) PARAM, (VAR, ##3), (IDLE), (IDLE)
+	  20) WRITE, (INT, 2), (IDLE), (IDLE)
+	  21) PARAM, (CADEIA, Valor de 3.4-6: ), (IDLE), (IDLE)
+	  22) MENOS, (REAL, 3.4), (INT, 6), (VAR, ##4)
+	  23) PARAM, (VAR, ##4), (IDLE), (IDLE)
+	  24) WRITE, (INT, 2), (IDLE), (IDLE)
+	  25) PARAM, (CADEIA, Valor de char 7 menos char 0: ), (IDLE), (IDLE)
+	  26) MENOS, (CARAC, ˜), (CARAC, 4), (VAR, ##5)
+	  27) PARAM, (VAR, ##5), (IDLE), (IDLE)
+	  28) WRITE, (INT, 2), (IDLE), (IDLE)
+	  29) PARAM, (CADEIA, Valor de 3*24: ), (IDLE), (IDLE)
+	  30) MULT, (INT, 3), (INT, 24), (VAR, ##6)
+	  31) PARAM, (VAR, ##6), (IDLE), (IDLE)
+	  32) WRITE, (INT, 2), (IDLE), (IDLE)
+	  33) PARAM, (CADEIA, Valor de 3.4*6: ), (IDLE), (IDLE)
+	  34) MULT, (REAL, 3.4), (INT, 6), (VAR, ##7)
+	  35) PARAM, (VAR, ##7), (IDLE), (IDLE)
+	  36) WRITE, (INT, 2), (IDLE), (IDLE)
+	  37) PARAM, (CADEIA, Valor de 35/7: ), (IDLE), (IDLE)
+	  38) DIV, (INT, 35), (INT, 7), (VAR, ##8)
+	  39) PARAM, (VAR, ##8), (IDLE), (IDLE)
+	  40) WRITE, (INT, 2), (IDLE), (IDLE)
+	  41) PARAM, (CADEIA, Valor de 25.5/5: ), (IDLE), (IDLE)
+	  42) DIV, (REAL, 25.5), (INT, 5), (VAR, ##9)
+	  43) PARAM, (VAR, ##9), (IDLE), (IDLE)
+	  44) WRITE, (INT, 2), (IDLE), (IDLE)
+	  45) PARAM, (CADEIA, Valor de 49%6: ), (IDLE), (IDLE)
+	  46) RESTO, (INT, 49), (INT, 6), (VAR, ##10)
+	  47) PARAM, (VAR, ##10), (IDLE), (IDLE)
+	  48) WRITE, (INT, 2), (IDLE), (IDLE)
+	  49) PARAM, (CADEIA, Valor de -3: ), (IDLE), (IDLE)
+	  50) MENUN, (INT, 3), (IDLE), (VAR, ##11)
+	  51) PARAM, (VAR, ##11), (IDLE), (IDLE)
+	  52) WRITE, (INT, 2), (IDLE), (IDLE)
+	  53) PARAM, (CADEIA, Valor de -49/7.3: ), (IDLE), (IDLE)
+	  54) MENUN, (INT, 49), (IDLE), (VAR, ##12)
+	  55) DIV, (VAR, ##12), (REAL, 7.3), (VAR, ##13)
+	  56) PARAM, (VAR, ##13), (IDLE), (IDLE)
+	  57) WRITE, (INT, 2), (IDLE), (IDLE)
+	  58) PARAM, (CADEIA, Resultado de -4.5<65: ), (IDLE), (IDLE)
+	  59) MENUN, (REAL, 4.5), (IDLE), (VAR, ##14)
+	  60) LT, (VAR, ##14), (INT, 65), (VAR, ##15)
+	  61) PARAM, (VAR, ##15), (IDLE), (IDLE)
+	  62) WRITE, (INT, 2), (IDLE), (IDLE)
+	  63) PARAM, (CADEIA, Resultado de -4.5>65: ), (IDLE), (IDLE)
+	  64) MENUN, (REAL, 4.5), (IDLE), (VAR, ##16)
+	  65) GT, (VAR, ##16), (INT, 65), (VAR, ##17)
+	  66) PARAM, (VAR, ##17), (IDLE), (IDLE)
+	  67) WRITE, (INT, 2), (IDLE), (IDLE)
+	  68) PARAM, (CADEIA, Resultado de -4.5<=65: ), (IDLE), (IDLE)
+	  69) MENUN, (REAL, 4.5), (IDLE), (VAR, ##18)
+	  70) LE, (VAR, ##18), (INT, 65), (VAR, ##19)
+	  71) PARAM, (VAR, ##19), (IDLE), (IDLE)
+	  72) WRITE, (INT, 2), (IDLE), (IDLE)
+	  73) PARAM, (CADEIA, Resultado de -4.5<=-4.5: ), (IDLE), (IDLE)
+	  74) MENUN, (REAL, 4.5), (IDLE), (VAR, ##20)
+	  75) MENUN, (REAL, 4.5), (IDLE), (VAR, ##21)
+	  76) LE, (VAR, ##20), (VAR, ##21), (VAR, ##22)
+	  77) PARAM, (VAR, ##22), (IDLE), (IDLE)
+	  78) WRITE, (INT, 2), (IDLE), (IDLE)
+	  79) PARAM, (CADEIA, Resultado de -4.5>=65: ), (IDLE), (IDLE)
+	  80) MENUN, (REAL, 4.5), (IDLE), (VAR, ##23)
+	  81) GE, (VAR, ##23), (INT, 65), (VAR, ##24)
+	  82) PARAM, (VAR, ##24), (IDLE), (IDLE)
+	  83) WRITE, (INT, 2), (IDLE), (IDLE)
+	  84) PARAM, (CADEIA, Resultado de -4.5>=-4.5: ), (IDLE), (IDLE)
+	  85) MENUN, (REAL, 4.5), (IDLE), (VAR, ##25)
+	  86) MENUN, (REAL, 4.5), (IDLE), (VAR, ##26)
+	  87) GE, (VAR, ##25), (VAR, ##26), (VAR, ##27)
+	  88) PARAM, (VAR, ##27), (IDLE), (IDLE)
+	  89) WRITE, (INT, 2), (IDLE), (IDLE)
+	  90) PARAM, (CADEIA, Resultado de -4.5==65: ), (IDLE), (IDLE)
+	  91) MENUN, (REAL, 4.5), (IDLE), (VAR, ##28)
+	  92) EQ, (VAR, ##28), (INT, 65), (VAR, ##29)
+	  93) PARAM, (VAR, ##29), (IDLE), (IDLE)
+	  94) WRITE, (INT, 2), (IDLE), (IDLE)
+	  95) PARAM, (CADEIA, Resultado de -4.5==-4.5: ), (IDLE), (IDLE)
+	  96) MENUN, (REAL, 4.5), (IDLE), (VAR, ##30)
+	  97) MENUN, (REAL, 4.5), (IDLE), (VAR, ##31)
+	  98) EQ, (VAR, ##30), (VAR, ##31), (VAR, ##32)
+	  99) PARAM, (VAR, ##32), (IDLE), (IDLE)
+	 100) WRITE, (INT, 2), (IDLE), (IDLE)
+	 101) PARAM, (CADEIA, Resultado de TRUE==FALSE: ), (IDLE), (IDLE)
+	 102) EQ, (LOGIC, 1), (LOGIC, 0), (VAR, ##33)
+	 103) PARAM, (VAR, ##33), (IDLE), (IDLE)
+	 104) WRITE, (INT, 2), (IDLE), (IDLE)
+	 105) PARAM, (CADEIA, Resultado de -4.5!=65: ), (IDLE), (IDLE)
+	 106) MENUN, (REAL, 4.5), (IDLE), (VAR, ##34)
+	 107) NE, (VAR, ##34), (INT, 65), (VAR, ##35)
+	 108) PARAM, (VAR, ##35), (IDLE), (IDLE)
+	 109) WRITE, (INT, 2), (IDLE), (IDLE)
+	 110) PARAM, (CADEIA, Resultado de -4.5!=-4.5: ), (IDLE), (IDLE)
+	 111) MENUN, (REAL, 4.5), (IDLE), (VAR, ##36)
+	 112) MENUN, (REAL, 4.5), (IDLE), (VAR, ##37)
+	 113) NE, (VAR, ##36), (VAR, ##37), (VAR, ##38)
+	 114) PARAM, (VAR, ##38), (IDLE), (IDLE)
+	 115) WRITE, (INT, 2), (IDLE), (IDLE)
+	 116) PARAM, (CADEIA, Resultado de TRUE!=FALSE: ), (IDLE), (IDLE)
+	 117) NE, (LOGIC, 1), (LOGIC, 0), (VAR, ##39)
+	 118) PARAM, (VAR, ##39), (IDLE), (IDLE)
+	 119) WRITE, (INT, 2), (IDLE), (IDLE)
+	 120) PARAM, (CADEIA, Resultado de TRUE||FALSE: ), (IDLE), (IDLE)
+	 121) OR, (LOGIC, 1), (LOGIC, 0), (VAR, ##40)
+	 122) PARAM, (VAR, ##40), (IDLE), (IDLE)
+	 123) WRITE, (INT, 2), (IDLE), (IDLE)
+	 124) PARAM, (CADEIA, Resultado de TRUE&&FALSE: ), (IDLE), (IDLE)
+	 125) AND, (LOGIC, 1), (LOGIC, 0), (VAR, ##41)
+	 126) PARAM, (VAR, ##41), (IDLE), (IDLE)
+	 127) WRITE, (INT, 2), (IDLE), (IDLE)
+	 128) PARAM, (CADEIA, Resultado de !TRUE: ), (IDLE), (IDLE)
+	 129) NOT, (LOGIC, 1), (IDLE), (VAR, ##42)
+	 130) PARAM, (VAR, ##42), (IDLE), (IDLE)
+	 131) WRITE, (INT, 2), (IDLE), (IDLE)
+	 132) PARAM, (CADEIA, Resultado de !FALSE: ), (IDLE), (IDLE)
+	 133) NOT, (LOGIC, 0), (IDLE), (VAR, ##43)
+	 134) PARAM, (VAR, ##43), (IDLE), (IDLE)
+	 135) WRITE, (INT, 2), (IDLE), (IDLE)
+	 136) OPEXIT, (IDLE), (IDLE), (IDLE)
+
+
+INTERPRETADOR:
+
+		Alocando as variaveis:
+			##1: 1 elemento(s) alocado(s) 
+			##2: 1 elemento(s) alocado(s) 
+			a: 1 elemento(s) alocado(s) 
+			##10: 1 elemento(s) alocado(s) 
+			##3: 1 elemento(s) alocado(s) 
+			b: 1 elemento(s) alocado(s) 
+			##20: 1 elemento(s) alocado(s) 
+			##11: 1 elemento(s) alocado(s) 
+			##4: 1 elemento(s) alocado(s) 
+			c: 1 elemento(s) alocado(s) 
+			##30: 1 elemento(s) alocado(s) 
+			##21: 1 elemento(s) alocado(s) 
+			##12: 1 elemento(s) alocado(s) 
+			##5: 1 elemento(s) alocado(s) 
+			##40: 1 elemento(s) alocado(s) 
+			##31: 1 elemento(s) alocado(s) 
+			##22: 1 elemento(s) alocado(s) 
+			##13: 1 elemento(s) alocado(s) 
+			##6: 1 elemento(s) alocado(s) 
+			b1: 1 elemento(s) alocado(s) 
+			##41: 1 elemento(s) alocado(s) 
+			##32: 1 elemento(s) alocado(s) 
+			##23: 1 elemento(s) alocado(s) 
+			##14: 1 elemento(s) alocado(s) 
+			##7: 1 elemento(s) alocado(s) 
+			##42: 1 elemento(s) alocado(s) 
+			##33: 1 elemento(s) alocado(s) 
+			##24: 1 elemento(s) alocado(s) 
+			##15: 1 elemento(s) alocado(s) 
+			##8: 1 elemento(s) alocado(s) 
+			##43: 1 elemento(s) alocado(s) 
+			##34: 1 elemento(s) alocado(s) 
+			##25: 1 elemento(s) alocado(s) 
+			##16: 1 elemento(s) alocado(s) 
+			##9: 1 elemento(s) alocado(s) 
+			##35: 1 elemento(s) alocado(s) 
+			##26: 1 elemento(s) alocado(s) 
+			##17: 1 elemento(s) alocado(s) 
+			i: 1 elemento(s) alocado(s) 
+			##36: 1 elemento(s) alocado(s) 
+			##27: 1 elemento(s) alocado(s) 
+			##18: 1 elemento(s) alocado(s) 
+			j: 1 elemento(s) alocado(s) 
+			##37: 1 elemento(s) alocado(s) 
+			##28: 1 elemento(s) alocado(s) 
+			##19: 1 elemento(s) alocado(s) 
+			k: 1 elemento(s) alocado(s) 
+			##38: 1 elemento(s) alocado(s) 
+			##29: 1 elemento(s) alocado(s) 
+			##39: 1 elemento(s) alocado(s) 
+			A: 20 elemento(s) alocado(s) 
+		Escrevendo: 
+
+Valor 1: 14; Valor 2: 15.2; Valor 3: TRUE
+
+		Escrevendo: 
+
+Valor de 3+4: 7
+
+		Escrevendo: 
+
+Valor de 3.4+6: 9.4
+
+		Escrevendo: 
+
+Valor de 3-4: -1
+
+		Escrevendo: 
+
+Valor de 3.4-6: -2.6
+
+		Escrevendo: 
+
+Valor de char 7 menos char 0: -156
+
+		Escrevendo: 
+
+Valor de 3*24: 72
+
+		Escrevendo: 
+
+Valor de 3.4*6: 20.4
+
+		Escrevendo: 
+
+Valor de 35/7: 5
+
+		Escrevendo: 
+
+Valor de 25.5/5: 5.1
+
+		Escrevendo: 
+
+Valor de 49%6: 1
+
+		Escrevendo: 
+
+Valor de -3: -3
+
+		Escrevendo: 
+
+Valor de -49/7.3: -6.71233
+
+		Escrevendo: 
+
+Resultado de -4.5<65: TRUE
+
+		Escrevendo: 
+
+Resultado de -4.5>65: FALSE
+
+		Escrevendo: 
+
+Resultado de -4.5<=65: TRUE
+
+		Escrevendo: 
+
+Resultado de -4.5<=-4.5: TRUE
+
+		Escrevendo: 
+
+Resultado de -4.5>=65: FALSE
+
+		Escrevendo: 
+
+Resultado de -4.5>=-4.5: TRUE
+
+		Escrevendo: 
+
+Resultado de -4.5==65: FALSE
+
+		Escrevendo: 
+
+Resultado de -4.5==-4.5: TRUE
+
+		Escrevendo: 
+
+Resultado de TRUE==FALSE: FALSE
+
+		Escrevendo: 
+
+Resultado de -4.5!=65: TRUE
+
+		Escrevendo: 
+
+Resultado de -4.5!=-4.5: FALSE
+
+		Escrevendo: 
+
+Resultado de TRUE!=FALSE: TRUE
+
+		Escrevendo: 
+
+Resultado de TRUE||FALSE: TRUE
+
+		Escrevendo: 
+
+Resultado de TRUE&&FALSE: FALSE
+
+		Escrevendo: 
+
+Resultado de !TRUE: FALSE
+
+		Escrevendo: 
+
+Resultado de !FALSE: TRUE
+

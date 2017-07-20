@@ -1,0 +1,155 @@
+program teste;
+
+var
+    int i, j, k;
+    float x, y;
+    logic a, b;
+    char m, n;
+{
+    read(i, j, x, b);
+    write("i: ", i, "; j: ", j, "; x: ", x, "; b: ", b);
+    k = i + j;
+    y = x + 3.4;
+    a = i < j;
+    write("k: ", k, "; y: ", y, "; a: ", a);
+    read(m);
+    n = m + ' ';
+    write("m: ", m, "; n: ", n);
+}
+x do escopo teste nao inicializado
+b do escopo teste nao inicializado
+i do escopo teste nao inicializado
+j do escopo teste nao inicializado
+m do escopo teste nao inicializado
+
+
+   TABELA  DE  SIMBOLOS:
+
+Classe 4:
+  ##1(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 5:
+  ##2(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  a(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  x(IDVAR REAL), escopo: teste
+	Inicializado: 0, Referenciado: 1
+
+Classe 6:
+  ##3(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  b(IDVAR LOGICO), escopo: teste
+	Inicializado: 0, Referenciado: 1
+
+  y(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 7:
+  ##4(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 13:
+  i(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 1
+
+Classe 14:
+  j(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 1
+
+Classe 15:
+  k(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 17:
+  m(IDVAR CARACTERE), escopo: teste
+	Inicializado: 0, Referenciado: 1
+
+Classe 18:
+  n(IDVAR CARACTERE), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 20:
+  teste(IDPROG NAOVAR), escopo: null
+	Variaveis:  ##4(INTEIRO) ##3(LOGICO) ##2(REAL) ##1(INTEIRO) n(CARACTERE) m(CARACTERE) b(LOGICO) a(LOGICO) y(REAL) x(REAL) k(INTEIRO) j(INTEIRO) i(INTEIRO)
+
+
+
+Quadruplas do modulo teste:
+
+	   1) OPENMOD, (MODULO, teste), (IDLE), (IDLE)
+	   2) PARAM, (VAR, i), (IDLE), (IDLE)
+	   3) PARAM, (VAR, j), (IDLE), (IDLE)
+	   4) PARAM, (VAR, x), (IDLE), (IDLE)
+	   5) PARAM, (VAR, b), (IDLE), (IDLE)
+	   6) READ, (INT, 4), (IDLE), (IDLE)
+	   7) PARAM, (CADEIA, i: ), (IDLE), (IDLE)
+	   8) PARAM, (VAR, i), (IDLE), (IDLE)
+	   9) PARAM, (CADEIA, ; j: ), (IDLE), (IDLE)
+	  10) PARAM, (VAR, j), (IDLE), (IDLE)
+	  11) PARAM, (CADEIA, ; x: ), (IDLE), (IDLE)
+	  12) PARAM, (VAR, x), (IDLE), (IDLE)
+	  13) PARAM, (CADEIA, ; b: ), (IDLE), (IDLE)
+	  14) PARAM, (VAR, b), (IDLE), (IDLE)
+	  15) WRITE, (INT, 8), (IDLE), (IDLE)
+	  16) MAIS, (VAR, i), (VAR, j), (VAR, ##1)
+	  17) ATRIB, (VAR, ##1), (IDLE), (VAR, k)
+	  18) MAIS, (VAR, x), (REAL, 3.4), (VAR, ##2)
+	  19) ATRIB, (VAR, ##2), (IDLE), (VAR, y)
+	  20) LT, (VAR, i), (VAR, j), (VAR, ##3)
+	  21) ATRIB, (VAR, ##3), (IDLE), (VAR, a)
+	  22) PARAM, (CADEIA, k: ), (IDLE), (IDLE)
+	  23) PARAM, (VAR, k), (IDLE), (IDLE)
+	  24) PARAM, (CADEIA, ; y: ), (IDLE), (IDLE)
+	  25) PARAM, (VAR, y), (IDLE), (IDLE)
+	  26) PARAM, (CADEIA, ; a: ), (IDLE), (IDLE)
+	  27) PARAM, (VAR, a), (IDLE), (IDLE)
+	  28) WRITE, (INT, 6), (IDLE), (IDLE)
+	  29) PARAM, (VAR, m), (IDLE), (IDLE)
+	  30) READ, (INT, 1), (IDLE), (IDLE)
+	  31) MAIS, (VAR, m), (CARAC, Ì), (VAR, ##4)
+	  32) ATRIB, (VAR, ##4), (IDLE), (VAR, n)
+	  33) PARAM, (CADEIA, m: ), (IDLE), (IDLE)
+	  34) PARAM, (VAR, m), (IDLE), (IDLE)
+	  35) PARAM, (CADEIA, ; n: ), (IDLE), (IDLE)
+	  36) PARAM, (VAR, n), (IDLE), (IDLE)
+	  37) WRITE, (INT, 4), (IDLE), (IDLE)
+	  38) OPEXIT, (IDLE), (IDLE), (IDLE)
+
+
+INTERPRETADOR:
+
+		Alocando as variaveis:
+			##1: 1 elemento(s) alocado(s) 
+			##2: 1 elemento(s) alocado(s) 
+			a: 1 elemento(s) alocado(s) 
+			x: 1 elemento(s) alocado(s) 
+			##3: 1 elemento(s) alocado(s) 
+			b: 1 elemento(s) alocado(s) 
+			y: 1 elemento(s) alocado(s) 
+			##4: 1 elemento(s) alocado(s) 
+			i: 1 elemento(s) alocado(s) 
+			j: 1 elemento(s) alocado(s) 
+			k: 1 elemento(s) alocado(s) 
+			m: 1 elemento(s) alocado(s) 
+			n: 1 elemento(s) alocado(s) 
+		Lendo: 
+
+		Escrevendo: 
+
+i: 1; j: 2; x: 3; b: FALSE
+
+		Escrevendo: 
+
+k: 3; y: 6.4; a: TRUE
+
+		Lendo: 
+
+		Escrevendo: 
+
+m:  ; n: ì
+

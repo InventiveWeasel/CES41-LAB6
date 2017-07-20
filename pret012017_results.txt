@@ -1,0 +1,318 @@
+program teste;
+
+var
+    int a, b, c, i, j;
+    float k;
+    logic b1;
+    int A[5][4];
+{
+    write("Valor 1: ", 14, "; Valor 2: ", 15.2, "; Valor 3: ", true);
+    write("Valor de 3+4: ", 3 + 4);
+    a = 1;
+    b = 2;
+    i = 3;
+    j = 4;
+    c = a + b + i + j + 20;
+    k = 12.6;
+    b1 = true;
+    write("c = ", c, "; k = ", k, "; b1 = ", b1, ";");
+    i = 4;
+    j = 5;
+    b1 = true;
+    if(b1)
+        {
+            i = j + 6;
+        }
+    else
+        {
+            i = i + 15;
+        }
+    write("i = ", i);
+    i = 4;
+    j = 5;
+    b1 = true;
+    while(b1)
+    {
+        i = i + j;
+        b1 = false;
+    }
+    write("i = ", i);
+    i = 3;
+    k = 20.3;
+    write("i = ", i, "; k = ", k);
+    while(i < k)
+    {
+        i = i + 4;
+        write("i = ", i, "; k = ", k);
+    }
+    write("Valor de i+k: ", i + k);
+    i = 0;
+    repeat
+    {
+        i = i + 1;
+    }
+    while(i < 10);
+    write("Valor de i: ", i);
+}
+A do escopo teste nao referenciado
+A do escopo teste nao inicializado
+
+
+   TABELA  DE  SIMBOLOS:
+
+Classe 4:
+  ##1(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 5:
+  ##2(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  a(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 6:
+  ##10(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##3(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  b(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 7:
+  ##11(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##4(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  c(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 8:
+  ##12(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##5(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 9:
+  ##13(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  ##6(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+  b1(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 10:
+  ##7(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 11:
+  ##8(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 12:
+  ##9(IDVAR LOGICO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 13:
+  i(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 14:
+  j(IDVAR INTEIRO), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 15:
+  k(IDVAR REAL), escopo: teste
+	Inicializado: 1, Referenciado: 1
+
+Classe 19:
+  A(IDVAR INTEIRO), escopo: teste
+	Inicializado: 0, Referenciado: 0
+	Array: (2 dimensoes): 5 4
+
+Classe 20:
+  teste(IDPROG NAOVAR), escopo: null
+	Variaveis:  ##13(LOGICO) ##12(INTEIRO) ##11(REAL) ##10(INTEIRO) ##9(LOGICO) ##8(INTEIRO) ##7(INTEIRO) ##6(INTEIRO) ##5(INTEIRO) ##4(INTEIRO) ##3(INTEIRO) ##2(INTEIRO) ##1(INTEIRO) A(INTEIRO) b1(LOGICO) k(REAL) j(INTEIRO) i(INTEIRO) c(INTEIRO) b(INTEIRO) a(INTEIRO)
+
+
+
+Quadruplas do modulo teste:
+
+	   1) OPENMOD, (MODULO, teste), (IDLE), (IDLE)
+	   2) PARAM, (CADEIA, Valor 1: ), (IDLE), (IDLE)
+	   3) PARAM, (INT, 14), (IDLE), (IDLE)
+	   4) PARAM, (CADEIA, ; Valor 2: ), (IDLE), (IDLE)
+	   5) PARAM, (REAL, 15.2), (IDLE), (IDLE)
+	   6) PARAM, (CADEIA, ; Valor 3: ), (IDLE), (IDLE)
+	   7) PARAM, (LOGIC, 1), (IDLE), (IDLE)
+	   8) WRITE, (INT, 6), (IDLE), (IDLE)
+	   9) PARAM, (CADEIA, Valor de 3+4: ), (IDLE), (IDLE)
+	  10) MAIS, (INT, 3), (INT, 4), (VAR, ##1)
+	  11) PARAM, (VAR, ##1), (IDLE), (IDLE)
+	  12) WRITE, (INT, 2), (IDLE), (IDLE)
+	  13) ATRIB, (INT, 1), (IDLE), (VAR, a)
+	  14) ATRIB, (INT, 2), (IDLE), (VAR, b)
+	  15) ATRIB, (INT, 3), (IDLE), (VAR, i)
+	  16) ATRIB, (INT, 4), (IDLE), (VAR, j)
+	  17) MAIS, (VAR, a), (VAR, b), (VAR, ##2)
+	  18) MAIS, (VAR, ##2), (VAR, i), (VAR, ##3)
+	  19) MAIS, (VAR, ##3), (VAR, j), (VAR, ##4)
+	  20) MAIS, (VAR, ##4), (INT, 20), (VAR, ##5)
+	  21) ATRIB, (VAR, ##5), (IDLE), (VAR, c)
+	  22) ATRIB, (REAL, 12.6), (IDLE), (VAR, k)
+	  23) ATRIB, (LOGIC, 1), (IDLE), (VAR, b1)
+	  24) PARAM, (CADEIA, c = ), (IDLE), (IDLE)
+	  25) PARAM, (VAR, c), (IDLE), (IDLE)
+	  26) PARAM, (CADEIA, ; k = ), (IDLE), (IDLE)
+	  27) PARAM, (VAR, k), (IDLE), (IDLE)
+	  28) PARAM, (CADEIA, ; b1 = ), (IDLE), (IDLE)
+	  29) PARAM, (VAR, b1), (IDLE), (IDLE)
+	  30) PARAM, (CADEIA, ;), (IDLE), (IDLE)
+	  31) WRITE, (INT, 7), (IDLE), (IDLE)
+	  32) ATRIB, (INT, 4), (IDLE), (VAR, i)
+	  33) ATRIB, (INT, 5), (IDLE), (VAR, j)
+	  34) ATRIB, (LOGIC, 1), (IDLE), (VAR, b1)
+	  35) JF, (VAR, b1), (IDLE), (ROTULO, 39)
+	  36) MAIS, (VAR, j), (INT, 6), (VAR, ##6)
+	  37) ATRIB, (VAR, ##6), (IDLE), (VAR, i)
+	  38) JUMP, (IDLE), (IDLE), (ROTULO, 42)
+	  39) NOP, (IDLE), (IDLE), (IDLE)
+	  40) MAIS, (VAR, i), (INT, 15), (VAR, ##7)
+	  41) ATRIB, (VAR, ##7), (IDLE), (VAR, i)
+	  42) NOP, (IDLE), (IDLE), (IDLE)
+	  43) PARAM, (CADEIA, i = ), (IDLE), (IDLE)
+	  44) PARAM, (VAR, i), (IDLE), (IDLE)
+	  45) WRITE, (INT, 2), (IDLE), (IDLE)
+	  46) ATRIB, (INT, 4), (IDLE), (VAR, i)
+	  47) ATRIB, (INT, 5), (IDLE), (VAR, j)
+	  48) ATRIB, (LOGIC, 1), (IDLE), (VAR, b1)
+	  49) NOP, (IDLE), (IDLE), (IDLE)
+	  50) JF, (VAR, b1), (IDLE), (ROTULO, 55)
+	  51) MAIS, (VAR, i), (VAR, j), (VAR, ##8)
+	  52) ATRIB, (VAR, ##8), (IDLE), (VAR, i)
+	  53) ATRIB, (LOGIC, 0), (IDLE), (VAR, b1)
+	  54) JUMP, (IDLE), (IDLE), (ROTULO, 49)
+	  55) NOP, (IDLE), (IDLE), (IDLE)
+	  56) PARAM, (CADEIA, i = ), (IDLE), (IDLE)
+	  57) PARAM, (VAR, i), (IDLE), (IDLE)
+	  58) WRITE, (INT, 2), (IDLE), (IDLE)
+	  59) ATRIB, (INT, 3), (IDLE), (VAR, i)
+	  60) ATRIB, (REAL, 20.3), (IDLE), (VAR, k)
+	  61) PARAM, (CADEIA, i = ), (IDLE), (IDLE)
+	  62) PARAM, (VAR, i), (IDLE), (IDLE)
+	  63) PARAM, (CADEIA, ; k = ), (IDLE), (IDLE)
+	  64) PARAM, (VAR, k), (IDLE), (IDLE)
+	  65) WRITE, (INT, 4), (IDLE), (IDLE)
+	  66) NOP, (IDLE), (IDLE), (IDLE)
+	  67) LT, (VAR, i), (VAR, k), (VAR, ##9)
+	  68) JF, (VAR, ##9), (IDLE), (ROTULO, 77)
+	  69) MAIS, (VAR, i), (INT, 4), (VAR, ##10)
+	  70) ATRIB, (VAR, ##10), (IDLE), (VAR, i)
+	  71) PARAM, (CADEIA, i = ), (IDLE), (IDLE)
+	  72) PARAM, (VAR, i), (IDLE), (IDLE)
+	  73) PARAM, (CADEIA, ; k = ), (IDLE), (IDLE)
+	  74) PARAM, (VAR, k), (IDLE), (IDLE)
+	  75) WRITE, (INT, 4), (IDLE), (IDLE)
+	  76) JUMP, (IDLE), (IDLE), (ROTULO, 66)
+	  77) NOP, (IDLE), (IDLE), (IDLE)
+	  78) PARAM, (CADEIA, Valor de i+k: ), (IDLE), (IDLE)
+	  79) MAIS, (VAR, i), (VAR, k), (VAR, ##11)
+	  80) PARAM, (VAR, ##11), (IDLE), (IDLE)
+	  81) WRITE, (INT, 2), (IDLE), (IDLE)
+	  82) ATRIB, (INT, 0), (IDLE), (VAR, i)
+	  83) NOP, (IDLE), (IDLE), (IDLE)
+	  84) MAIS, (VAR, i), (INT, 1), (VAR, ##12)
+	  85) ATRIB, (VAR, ##12), (IDLE), (VAR, i)
+	  86) LT, (VAR, i), (INT, 10), (VAR, ##13)
+	  87) JF, (VAR, ##13), (IDLE), (ROTULO, 89)
+	  88) JUMP, (IDLE), (IDLE), (ROTULO, 83)
+	  89) NOP, (IDLE), (IDLE), (IDLE)
+	  90) PARAM, (CADEIA, Valor de i: ), (IDLE), (IDLE)
+	  91) PARAM, (VAR, i), (IDLE), (IDLE)
+	  92) WRITE, (INT, 2), (IDLE), (IDLE)
+	  93) OPEXIT, (IDLE), (IDLE), (IDLE)
+
+
+INTERPRETADOR:
+
+		Alocando as variaveis:
+			##1: 1 elemento(s) alocado(s) 
+			##2: 1 elemento(s) alocado(s) 
+			a: 1 elemento(s) alocado(s) 
+			##10: 1 elemento(s) alocado(s) 
+			##3: 1 elemento(s) alocado(s) 
+			b: 1 elemento(s) alocado(s) 
+			##11: 1 elemento(s) alocado(s) 
+			##4: 1 elemento(s) alocado(s) 
+			c: 1 elemento(s) alocado(s) 
+			##12: 1 elemento(s) alocado(s) 
+			##5: 1 elemento(s) alocado(s) 
+			##13: 1 elemento(s) alocado(s) 
+			##6: 1 elemento(s) alocado(s) 
+			b1: 1 elemento(s) alocado(s) 
+			##7: 1 elemento(s) alocado(s) 
+			##8: 1 elemento(s) alocado(s) 
+			##9: 1 elemento(s) alocado(s) 
+			i: 1 elemento(s) alocado(s) 
+			j: 1 elemento(s) alocado(s) 
+			k: 1 elemento(s) alocado(s) 
+			A: 20 elemento(s) alocado(s) 
+		Escrevendo: 
+
+Valor 1: 14; Valor 2: 15.2; Valor 3: TRUE
+
+		Escrevendo: 
+
+Valor de 3+4: 7
+
+		Escrevendo: 
+
+c = 30; k = 12.6; b1 = TRUE;
+
+		Escrevendo: 
+
+i = 11
+
+		Escrevendo: 
+
+i = 9
+
+		Escrevendo: 
+
+i = 3; k = 20.3
+
+		Escrevendo: 
+
+i = 7; k = 20.3
+
+		Escrevendo: 
+
+i = 11; k = 20.3
+
+		Escrevendo: 
+
+i = 15; k = 20.3
+
+		Escrevendo: 
+
+i = 19; k = 20.3
+
+		Escrevendo: 
+
+i = 23; k = 20.3
+
+		Escrevendo: 
+
+Valor de i+k: 43.3
+
+		Escrevendo: 
+
+Valor de i: 10
+
